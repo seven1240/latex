@@ -1,0 +1,54 @@
+\usepackage{tikz}
+\usepackage[absolute,overlay]{textpos}
+% uncomment to see grid system
+% \usepackage[texcoord,grid,gridcolor=red!10,subgridcolor=green!10,gridunit=cm]{eso-pic}
+
+\usepackage{shadowtext}
+\shadowcolor{black}
+\shadowoffset{1pt}
+
+\newcommand{\cover}{
+\begin{tikzpicture}[remember picture,overlay]
+\path [top color = yellow, bottom color = Orange] (current page.south west) rectangle (current page.north east);
+\end{tikzpicture}
+\color{white}
+
+\thispagestyle{empty}
+\pagenumbering{gobble}
+% \chapter*{}
+\bigskip
+\begin{center}
+  \textbf{\fontsize{36}{48}\selectfont\shadowtext{技术图书排版}}
+  \\[2em]
+  \Oldincludegraphics[width=0.5\paperwidth]{img/wenji.png}
+  \\[2em]
+  \textbf{\large \theauthors \quad 著\\[2em]}
+\end{center}
+
+\begin{textblock*}{4cm}[0.5,0.5](0.5\paperwidth, 13.8cm)
+\small
+\color{white}
+\center
+\textbf{小樱桃出品}
+\color{black}
+\end{textblock*}
+
+\bigskip
+\vfill
+\begin{adjustwidth}{-2.3mm}{}
+\mbox{\vbox{
+\color{yellow}
+\small
+\noindent{INVITE sip:you@xswitch.cn SIP/2.0\newline
+Via: SIP/2.0/TLS xswitch.cn:5060;branch=z9hG4bK74bf9\newline
+Max-Forwards: 70\newline
+From: {\color{yellow!60!white}\Oldtexttt{"}Seven Du\Oldtexttt{"}} <sip:seven@xswitch.cn>;tag=9fxced76sl\newline
+To: You <sip:you@xswitch.cn>\newline
+Call-ID: 3848276298220188511@xswitch.cn\newline
+CSeq: 2 INVITE\newline
+Contact: <sip:seven@xswitch.cn;transport=tls>
+}}}
+\end{adjustwidth}
+
+\color{black}
+}
