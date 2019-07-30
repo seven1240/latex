@@ -53,5 +53,12 @@ print: out preface.tex $(SRC)
 	-o out/技术图书排版-印刷版-$(VER).pdf \
 	$(SRC)
 
+docx: out preface.tex $(SRC)
+	$(PANDOC) -s --toc \
+	--number-sections \
+	--reference-doc reference.docx \
+	-o out/技术图书排版-$(VER).docx \
+	preface.md $(SRC)
+
 docker:
 	docker run -it -v `pwd`:/team dujinfang/texlive_pandoc:latest bash

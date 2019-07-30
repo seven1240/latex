@@ -108,7 +108,18 @@ print: out preface.tex $(SRC)
 	$(SRC)
 ```
 
-如果你本地没有安装Pandoc以及LaTex环境，可以使用我制作的Docker镜象。在命令行上执行`make docker`会进入一个Docker环境，并把当前目录映射到`/team`目录中，然后就可以继续`make`生成PDF了。
+为了照顾那些顽固地想看Word版的人，我们增加了一个`make docx`，就可以直接生成Word版了。其中`reference.docx`是一个模板，我在默认模板的基础上稍稍改了下增加了章节号。你可以参考Pandoc的官方文档看还能否玩出什么花来。
+
+```makefile
+docx: out preface.tex $(SRC)
+	$(PANDOC) -s --toc \
+	--number-sections \
+	--reference-doc reference.docx \
+	-o out/技术图书排版-$(VER).docx \
+	preface.md $(SRC)
+```
+
+如果你本地没有安装Pandoc以及LaTex环境，可以使用笔者制作的Docker镜象。在命令行上执行`make docker`会进入一个Docker环境，并把当前目录映射到`/team`目录中，然后就可以继续`make`生成PDF了。
 
 ```makefile
 docker:
@@ -140,7 +151,6 @@ verbatim-in-note: true
 我们使用`tikz`宏包，嗯，它是在LaTex里画图用的。类似于程序语言中的模块，LaTex使用宏包扩展本身的功能。其中`%`是注释。如果把`texcoord`那行注释去掉，可以看到一些参考线。
 
 ```tex
-%中文
 \usepackage{tikz}
 \usepackage[absolute,overlay]{textpos}
 % uncomment to see grid system
