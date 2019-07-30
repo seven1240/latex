@@ -36,7 +36,7 @@ $endif$
 
 [^noto-fonts]: <https://www.google.com/get/noto/>
 
-`mainfont`是主字体，`monofont`是等宽字体，`romanfont`就是英文相关的代码相关的字体，我们实验性地使用了Adobe的Source Code Pro，因为它有斜体（Italic），注意中文是没有斜体的，我们用楷体代替。
+`mainfont`是主字体，`monofont`是等宽字体，`romanfont`就是英文相关的代码相关的字体，我们实验性地使用了Adobe的Source Code Pro，因为它有斜体（Italic），注意中文是没有斜体的，我们用楷体代替。所有用到的字体都已经打包到了Docker镜象里，如果你不使用Docker，你需要下载并安装这些字体。可以从它们的官方网站上找找，或者到<https://github.com/seven1240/font>上面找。
 
 ```tex
 \usepackage{changepage}
