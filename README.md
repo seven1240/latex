@@ -225,7 +225,7 @@ LaTex的语法比较奇怪，还是那句话，懂不懂没关系（因为模板
 
 这个文件其实跟`cover.tex`差不多，只是调整了一些尺寸，看看`diff`吧：
 
-```
+```diff
 $ diff cover.tex cover-std.tex
 8c8
 < \shadowoffset{1pt}
