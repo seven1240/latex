@@ -1,6 +1,6 @@
 PANDOC := pandoc
 
-all: book
+all: mobile book print
 
 VER=7
 
