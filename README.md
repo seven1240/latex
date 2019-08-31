@@ -120,7 +120,7 @@ docx: out preface.tex $(SRC)
 	preface.md $(SRC)
 ```
 
-如果你本地没有安装Pandoc以及LaTex环境，可以使用笔者制作的Docker镜象。在命令行上执行`make docker`会进入一个Docker环境，并把当前目录映射到`/team`目录中，然后就可以继续`make`生成PDF了。
+如果你本地没有安装Pandoc以及LaTex环境，可以使用笔者制作的Docker镜象。在命令行上执行`make docker`会进入一个Docker容器中，并把当前目录映射到`/team`目录中，然后就可以继续`make`生成PDF了。
 
 ```makefile
 docker:
