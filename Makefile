@@ -50,6 +50,7 @@ print: out preface.tex $(SRC)
 	--pdf-engine=xelatex \
 	--include-in-header=cover-dummy.tex \
 	--include-before=header.tex \
+	--include-before-body=preface.tex \
 	-o out/技术图书排版-印刷版-$(VER).pdf \
 	$(SRC)
 
