@@ -5,15 +5,15 @@ all: mobile book print
 VER=7
 
 SRC = meta.md \
-	README.md \
+	chapter-1.md \
 	chapter-2.md \
 	chapter-3.md \
 	postface.md
 
-preface.tex: preface.md
+preface.tex: README.md
 	$(PANDOC) -s --variable documentclass=report \
 	--template template-dummy.tex \
-	-o preface.tex preface.md
+	-o preface.tex README.md
 
 out:
 	mkdir out
@@ -59,7 +59,7 @@ docx: out preface.tex $(SRC)
 	--number-sections \
 	--reference-doc reference.docx \
 	-o out/技术图书排版-$(VER).docx \
-	preface.md $(SRC)
+	README.md $(SRC)
 
 docker:
 	docker run -it -v `pwd`:/team dujinfang/texlive_pandoc:latest bash
