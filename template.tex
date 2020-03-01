@@ -1,5 +1,5 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$CJKutf8$if(print)$,twoside,openright$endif$]{$documentclass$}
-
+%,twoside,openright
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
 \hyphenation{FreeSWITCH}
@@ -19,6 +19,7 @@ $endif$
 \usepackage{changepage}
 \usepackage{float}
 \usepackage{fontspec}
+% \usepackage{alphabeta}
 \newcommand\mainfont{Noto Sans CJK SC DemiLight}
 \newcommand\kaifont{Adobe Kaiti Std}
 \newcommand\fangsong{Adobe Kaiti Std}
@@ -29,22 +30,41 @@ $endif$
 \newfontfamily\zhpunctfont[BoldFont=Noto Sans CJK SC Bold]{\mainfont}
 \setromanfont[Mapping=tex-text,BoldFont=Noto Sans CJK SC Bold,ItalicFont=Source Code Pro Italic]{\mainfont}
 \setmonofont{Noto Sans Mono CJK SC}
+% \setmonofont{Source Code Pro}
+% \renewcommand{\bfdefault}{sb}
+% \usepackage{xeCJK}
+% \setCJKmonofont{Adobe Kaiti Std}
+% \setCJKfamilyfont{kai}{Adobe Kaiti Std}
+% \usepackage[CJK,Emoticons]{ucharclasses} %% fallback fonts
+% \usepackage[CJK,Latin,Symbols,Emoticons,Arabic,Greek,Korean]{ucharclasses} %% fallback fonts
+% \setDefaultTransitions{\zhfont}{}
+% \setTransitionsForLatin{\zhfont}{}
+% \setTransitionsForCJK{\color{red}}{\color{black}}
+% \setTransitionTo{Emoticons}{\color{red}}
+% \newfontfamily\emoji[]{EmojiOne}
+% \newfontfamily\emoji[]{Noto Emoji}
+% \setTransitionTo{Symbols}{\emoji}
+% \setTransitionTo{Emoticons}{\emoji}
+% \setTransitions{Emoticons}{\emoji}{}
+% \setTransitionsFor{Emoticons}{\begingroup\emoji}{\endgroup}
+
+% \input{font-change-xetex}
 
 \usepackage{zhspacing}
 \zhspacing
 
 \usepackage{longtable}
-\usepackage{indentfirst}
+% \let\longtableOLD\longtable
+% \def\longtable{\longtableOLD\small}
 
+\usepackage{indentfirst}
 $if(mobile)$
 \setlength{\parindent}{0em}
 $else$
 \setlength{\parindent}{2em}
 $endif$
-
 % \renewcommand\thechapter{}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}
 {frame=lines,
@@ -131,9 +151,10 @@ $endif$
 \definecolor{BLACK}{rgb}{0.0, 0.0, 0.0}
 \definecolor{darkgreen}{RGB}{0,100,0}
 
-\newfontfamily\quotefont{STKaiti}
-\let\quoteOLD\quote
-\def\quote{\quoteOLD\color{thegray}\small\quotefont\selectfont}
+% \let\quoteOLD\quote
+% \renewcommand\quote{\color{thegray}\small\kai\selectfont\quoteOLD}
+% \expandafter\def\expandafter\quote\expandafter{\quote\color{thegray}\small\kai\selectfont}
+\expandafter\def\expandafter\quote\expandafter{\quote\color{thegray}\small\zhfont\selectfont}
 
 $if(print)$
 \let\tmp\oddsidemargin
@@ -343,7 +364,6 @@ $endif$
 
 \begin{document}
 \cover
-\newpage
 \thispagestyle{empty}
 \pagenumbering{gobble}
 \begin{center}
