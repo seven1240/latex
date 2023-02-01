@@ -15,6 +15,10 @@ License:   MIT – see LICENSE file for details
 PANDOC_VERSION:must_be_at_least '2.7.3'
 
 local system = require 'pandoc.system'
+local utils = require 'pandoc.utils'
+local stringify = function (s)
+  return type(s) == 'string' and s or utils.stringify(s)
+end
 local with_temporary_directory = system.with_temporary_directory
 local with_working_directory = system.with_working_directory
 
@@ -49,7 +53,9 @@ end
 -- The dot (Graphviz) path. In order to define a dot version per pandoc
 -- document, use the meta data to define the key "dotPath".
 local dotPath = os.getenv("DOT") or "dot"
+local twopiPath = os.getenv("TWOPI") or "twopi"
 local mscgenPath = os.getenv("MSCGEN") or "mscgen"
+local mmdcPath = os.getenv("MMDC") or "mmdc" -- mermaid
 
 -- The pdflatex path. In order to define a pdflatex version per pandoc
 -- document, use the meta data to define the key "pdflatexPath".
@@ -72,6 +78,9 @@ elseif FORMAT == "rtf" then
     filetype = "png"
     mimetype = "image/png"
 elseif FORMAT == "latex" then
+    filetype = "png"
+    mimetype = "image/png"
+elseif FORMAT == "html" then
     filetype = "png"
     mimetype = "image/png"
 end
@@ -100,13 +109,30 @@ end
 -- Call dot (GraphViz) in order to generate the image
 -- (thanks @muxueqz for this code):
 local function graphviz(code, filetype)
-    local final = pandoc.pipe(dotPath, {"-T" .. filetype, "-Gdpi=300"}, code)
+    local dpi = ""
+    if FORMAT == "chunkedhtml" then
+        dpi = "-Gdpi=72"
+    else
+        dpi = "-Gdpi=300"
+    end
+    local final = pandoc.pipe(dotPath, {"-T" .. filetype, dpi}, code)
     return final
+end
+
+local function twopi(code, filetype)
+  local final = pandoc.pipe(twopiPath, {"-T" .. filetype, "-Gdpi=300"}, code)
+  return final
 end
 
 local function mscgen(code, filetype)
     local outfile = string.format('%s.%s', os.tmpname(), filetype)
-    local final = pandoc.pipe(mscgenPath, {"-T", filetype, "-F", 'Noto Sans CJK KR DemiLight', "-o", outfile}, code)
+    local os_name = io.popen('uname -s','r'):read('*l')
+    local arch_name = io.popen('uname -m','r'):read('*l')
+    local font = 'Noto Sans CJK KR DemiLight'
+    if os_name == 'Darwin' then
+      font = "STFangSong"
+    end
+    local final = pandoc.pipe(mscgenPath, {"-T", filetype, "-F", font, "-o", outfile}, code)
 
     -- Try to open the written image:
     local r = io.open(outfile, 'rb')
@@ -125,6 +151,39 @@ local function mscgen(code, filetype)
     os.remove(outfile)
 
     return final
+end
+
+-- Call mmdc (Mermaid) in order to generate the image
+local function mermaid(code, filetype)
+  local outfile = string.format('%s.%s', os.tmpname(), filetype)
+  local infile = string.format('%s.mmd', os.tmpname())
+
+  local f = io.open(infile, 'w')
+  if f then
+      f:write(code)
+      f:close()
+  end
+
+  local final = pandoc.pipe(mmdcPath, {"-o", outfile, "-i", infile}, code)
+
+  -- Try to open the written image:
+  local r = io.open(outfile, 'rb')
+  local imgData = nil
+
+  -- When the image exist, read it:
+  if r then
+      final = r:read("*all")
+      r:close()
+  else
+      io.stderr:write(string.format("File '%s' could not be opened", outfile))
+      error 'Could not create image from mscgen code.'
+  end
+
+  -- Delete the tmp files:
+  os.remove(outfile)
+  os.remove(infile)
+
+  return final
 end
 
 --
@@ -300,134 +359,117 @@ end
 
 -- Executes each document's code block to find matching code blocks:
 function CodeBlock(block)
-    if block.classes[1] == "markmap" then
-      local graph = [[
-        graph G {
-          nodesep = 0.1;
-          rankdir = LR;
-          node[shape=plain margin=0.01];
-      ]]
-      local doc = pandoc.read(block.text, "markdown")
-      print(serialize(doc))
-      level = 1
-      nodes = {}
-      local last = nil
-      local last_block
-      for k,blk in ipairs(doc.blocks) do
-        if blk.level == nil then -- item list
-          table.insert(nodes, last)
-          level = level + 1
-          last = last_blk
+  -- Using a table with all known generators i.e. converters:
+  local converters = {
+    plantuml = plantuml,
+    graphviz = graphviz,
+    tikz = tikz2image,
+    py2image = py2image,
+    asymptote = asymptote,
+  }
 
-          for i,c in ipairs(blk.content) do
-            graph = graph .. "\nitem" .. tostring(k) .. '_' .. tostring(i) .. '[label="' ..
-              block_content(c[1]) .. '"];'
-            graph = graph .. "\n" .. block_identifier(last) ..
-              " -- " .. "item" .. tostring(k) .. '_' .. tostring(i)
-            -- rabbit hold could be deep ... recursive?
-          end
-          goto continue
-        end
-        if last == nil and blk.level == 1 then
-          last = blk
-        elseif blk.level > level then
-          table.insert(nodes, last)
-          level = level + 1
-          last = last_blk
-        elseif blk.level < level then
-          last = table.remove(nodes)
-          level = level - 1
-        end
-        if last and blk.level > 1 then
-          graph = graph .. "\n" .. block_identifier(blk) .. '[label="' ..
-            block_content(blk) .. '"];'
-          graph = graph .. "\n" .. block_identifier(last) ..
-            " -- " .. block_identifier(blk)
-        end
-        last_blk = blk
-        ::continue::
-      end
-      graph = graph .. "\n}"
-      block.classes[1] = "graphviz"
-      block.text = graph
-      print(graph)
-      -- return block
-    end
+  -- Check if a converter exists for this block. If not, return the block
+  -- unchanged.
+  local img_converter = converters[block.classes[1]]
+  if not img_converter then
+    return nil
+  end
 
-    -- Predefine a potential image:
-    local fname = nil
+  -- Call the correct converter which belongs to the used class:
+  local success, img = pcall(img_converter, block.text,
+      filetype, block.attributes["additionalPackages"] or nil)
 
-    -- Using a table with all known generators i.e. converters:
-    local converters = {
-        plantuml = plantuml,
-        dot = graphviz,
-        graphviz = graphviz,
-        tikz = tikz2image,
-        py2image = py2image,
-        msc = mscgen,
+  -- Bail if an error occured; img contains the error message when that
+  -- happens.
+  if not (success and img) then
+    io.stderr:write(tostring(img or "no image data has been returned."))
+    io.stderr:write('\n')
+    error 'Image conversion failed. Aborting.'
+  end
+
+  -- If we got here, then the transformation went ok and `img` contains
+  -- the image data.
+
+  -- Create figure name by hashing the image content
+  local fname = pandoc.sha1(img) .. "." .. filetype
+
+  -- Store the data in the media bag:
+  pandoc.mediabag.insert(fname, mimetype, img)
+
+  local enable_caption = nil
+
+  -- If the user defines a caption, read it as Markdown.
+  local caption = block.attributes.caption
+    and pandoc.read(block.attributes.caption).blocks
+    or pandoc.Blocks{}
+  local alt = pandoc.utils.blocks_to_inlines(caption)
+
+  if PANDOC_VERSION < 3 then
+    -- A non-empty caption means that this image is a figure. We have to
+    -- set the image title to "fig:" for pandoc to treat it as such.
+    local title = #caption > 0 and "fig:" or ""
+
+    -- Transfer identifier and other relevant attributes from the code
+    -- block to the image. The `name` is kept as an attribute.
+    -- This allows a figure block starting with:
+    --
+    --     ```{#fig:example .plantuml caption="Image created by **PlantUML**."}
+    --
+    -- to be referenced as @fig:example outside of the figure when used
+    -- with `pandoc-crossref`.
+    local img_attr = {
+      id = block.identifier,
+      name = block.attributes.name,
+      width = block.attributes.width,
+      height = block.attributes.height
     }
 
-    -- Check if a converter exists for this block. If not, return the block
-    -- unchanged.
-    local img_converter = converters[block.classes[1]]
-    if not img_converter then
-      return nil
-    end
+    -- Create a new image for the document's structure. Attach the user's
+    -- caption. Also use a hack (fig:) to enforce pandoc to create a
+    -- figure i.e. attach a caption to the image.
+    local img_obj = pandoc.Image(alt, fname, title, img_attr)
 
-    -- Call the correct converter which belongs to the used class:
-    local success, img = pcall(img_converter, block.text,
-        filetype, block.attributes["additionalPackages"] or nil)
+    -- Finally, put the image inside an empty paragraph. By returning the
+    -- resulting paragraph object, the source code block gets replaced by
+    -- the image:
+    return pandoc.Para{ img_obj }
+  else
+    local fig_attr = {
+      id = block.identifier,
+      name = block.attributes.name,
+    }
+    local img_attr = {
+      width = block.attributes.width,
+      height = block.attributes.height,
+    }
+    local img_obj = pandoc.Image(alt, fname, "", img_attr)
 
-    -- Was ok?
-    if success and img then
-        -- Hash the figure name and content:
-        fname = pandoc.sha1(img) .. "." .. filetype
+    -- Create a figure that contains just this image.
+    return pandoc.Figure(pandoc.Plain{img_obj}, caption, fig_attr)
+  end
+end
 
-        -- Store the data in the media bag:
-        pandoc.mediabag.insert(fname, mimetype, img)
+local function Math(math)
+  if FORMAT ~= "latex" then
+    return math
+  end
 
-    else
+  local t = math.mathtype or 'NOTYPE'
+  if t ~= 'DisplayMath' then
+    return math
+  end
 
-        -- an error occured; img contains the error message
-        io.stderr:write(tostring(img))
-        io.stderr:write('\n')
-        error 'Image conversion failed. Aborting.'
+  print("math:" .. t .. " " .. stringify(math) .. "\n")
 
-    end
+  local s = stringify(math)
+  local b = pandoc.RawBlock('tex', "\\begin{equation}")
+  local e = pandoc.RawBlock('tex', "\\end{equation}")
 
-    -- Case: This code block was an image e.g. PlantUML or dot/Graphviz, etc.:
-    if fname then
-
-        -- Define the default caption:
-        local caption = {}
-        local enableCaption = nil
-
-        -- If the user defines a caption, use it:
-        if block.attributes["caption"] then
-            caption = pandoc.read(block.attributes.caption).blocks[1].content
-
-            -- This is pandoc's current hack to enforce a caption:
-            enableCaption = "fig:"
-        end
-
-        -- Create a new image for the document's structure. Attach the user's
-        -- caption. Also use a hack (fig:) to enforce pandoc to create a
-        -- figure i.e. attach a caption to the image.
-        local imgObj = pandoc.Image(caption, fname, enableCaption)
-
-        -- Now, transfer the attribute "name" from the code block to the new
-        -- image block. It might gets used by the figure numbering lua filter.
-        -- If the figure numbering gets not used, this additional attribute
-        -- gets ignored as well.
-        if block.attributes["name"] then
-            imgObj.attributes["name"] = block.attributes["name"]
-        end
-
-        -- Finally, put the image inside an empty paragraph. By returning the
-        -- resulting paragraph object, the source code block gets replaced by
-        -- the image:
-        return pandoc.Para{ imgObj }
-    end
+  return {
+    pandoc.RawInline('latex', '\\begin{equation}'),
+    pandoc.RawInline('latex', s),
+    pandoc.RawInline('latex', '\\end{equation}')
+  }
 end
 
 -- Normally, pandoc will run the function in the built-in order Inlines ->
@@ -436,4 +478,5 @@ end
 return {
     {Meta = Meta},
     {CodeBlock = CodeBlock},
+    {Math = Math},
 }
