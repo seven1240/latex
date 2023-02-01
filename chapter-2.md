@@ -36,23 +36,29 @@ $endif$
 
 [^noto-fonts]: <https://www.google.com/get/noto/>
 
-`mainfont`是主字体，`monofont`是等宽字体，`romanfont`就是英文相关的代码相关的字体，我们实验性地使用了Adobe的Source Code Pro，因为它有斜体（Italic），注意中文是没有斜体的，我们用楷体代替。所有用到的字体都已经打包到了Docker镜象里，如果你不使用Docker，你需要下载并安装这些字体。可以从它们的官方网站上找找，或者到<https://github.com/seven1240/font>上面找。
+`mainfont`是主字体，`monofont`是等宽字体，`romanfont`就是英文相关的代码相关的字体，我们实验性地使用了Adobe的Source Code Pro，因为它有斜体（Italic），注意中文是没有斜体的，我们用楷体或德意黑体[^smiley-sans]代替。所有用到的字体都已经打包到了Docker镜象里，如果你不使用Docker，你需要下载并安装这些字体。可以从它们的官方网站上找找，或者到<https://github.com/seven1240/font>上面找。
+
+[^smiley-sans]: 德意黑体是2022年发布的免费开源字体，本身就是按斜体设计的，参见 <https://github.com/atelier-anchor/smiley-sans> 。
 
 ```tex
 \usepackage{changepage}
 \usepackage{float}
 \usepackage{fontspec}
 \newcommand\mainfont{Noto Sans CJK SC DemiLight}
+\newcommand\boldfont{Noto Sans CJK SC Bold}
+\newcommand\itfont{Smiley Sans}
 \newcommand\kaifont{Adobe Kaiti Std}
-\setmainfont[BoldFont=Noto Sans CJK SC Bold,ItalicFont={\kaifont}]{\mainfont}
+\newcommand\fangsong{Adobe Kaiti Std}
+\setmainfont[BoldFont=\boldfont,ItalicFont={\kaifont}]{\mainfont}
 \newfontfamily\kai{\kaifont}
-\newfontfamily\zhfont[BoldFont=Noto Sans CJK SC Bold,ItalicFont={\kaifont}]{\mainfont}
-\newfontfamily\zhpunctfont[BoldFont=Noto Sans CJK SC Bold]{\mainfont}
-\setromanfont[Mapping=tex-text,BoldFont=Noto Sans CJK SC Bold,ItalicFont=Source Code Pro Italic]{\mainfont}
+\newfontfamily\fs{\fangsong}
+\newfontfamily\zhfont[BoldFont=\boldfont,ItalicFont={\kaifont}]{\mainfont}
+\newfontfamily\zhpunctfont[BoldFont=\boldfont]{\mainfont}
+\setromanfont[Mapping=tex-text,BoldFont=\boldfont,ItalicFont=\itfont]{\mainfont}
 \setmonofont{Noto Sans Mono CJK SC}
 ```
 
-设置中文间距等。
+设置中文间距等（最新版的可能不需要了）。
 
 ```tex
 \usepackage{zhspacing}
@@ -395,6 +401,15 @@ $endif$
 \newcommand{\theauthor}{$author$}
 \newcommand{\theauthors}{$author$}
 \newcommand{\thepublisher}{$publisher$}
+```
+
+图片和表格的编号默认显示为`m.n`，改为`m-n`格式。
+
+```tex
+\renewcommand {\thetable} {\thechapter{}-\arabic{table}}
+\renewcommand {\thefigure} {\thechapter{}-\arabic{figure}}
+% \renewcommand {\thelisting} {\thechapter{}-\arabic{listing}}
+\renewcommand {\theequation} {\thechapter{}-\arabic{equation}}
 
 % fix --listing missing passthrough https://github.com/laboon/ebook/issues/139
 % \newcommand{\passthrough}[1]{\lstset{mathescape=false}\color{red}#1\color{black}\lstset{mathescape=true}}

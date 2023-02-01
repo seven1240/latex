@@ -65,18 +65,18 @@ XSwitch是一个SSaaS（Soft-Switch as a Service）平台，可以用来：
 * 网址：<http://x-y-t.cn>
 * 邮箱：info@x-y-t.cn
 
-下面是我们的微信公众号。为了能将两张图片排在一行上，直接使用了Latex代码。另外两张图片尺寸不同，所以两栏的宽度不是`0.5:0.5`，而是`0.56:0.44`，其中`\linewidth`为行宽。图片只能在PDF中显示，在Word文档中无法生成。
+下面是我们的微信公众号。为了能将两张图片排在一行上，直接使用了Latex代码。另外两张图片尺寸不同，所以两栏的宽度不是`0.5:0.5`，而是`0.55:0.44`（注意两者加起来小于1，这主要是为了防止移动版图片放不开产生换行），其中`\linewidth`为行宽。图片只能在PDF中显示，在Word文档和HTML中无法生成。
 
 \begin{figure}
-\begin{subfigure}{.56\linewidth}
+\begin{subfigure}{.55\linewidth}
   \centering
   \Oldincludegraphics[width=.99\linewidth]{img/xyt1.jpg}
-  \caption{小樱桃科技 微信公众号}
+  \caption{小樱桃科技}
 \end{subfigure}
 \begin{subfigure}{.44\linewidth}
   \centering
   \Oldincludegraphics[width=.99\linewidth]{img/qr-wechat.png}
-  \caption{FreeSWITCH-CN 微信公众号}
+  \caption{FreeSWITCH-CN}
 \end{subfigure}
 \end{figure}
 
@@ -84,17 +84,31 @@ XSwitch是一个SSaaS（Soft-Switch as a Service）平台，可以用来：
 
 ```tex
 \begin{figure}
-\begin{subfigure}{.56\linewidth}
+\begin{subfigure}{.55\linewidth}
   \centering
-  \Oldincludegraphics[width=.99\linewidth]{img/xyt1.jpg}
-  \caption{小樱桃科技 微信公众号}
+  \Oldincludegraphics[width=.98\linewidth]{img/xyt1.jpg}
+  \caption{小樱桃科技}
 \end{subfigure}
 \begin{subfigure}{.44\linewidth}
   \centering
-  \Oldincludegraphics[width=.99\linewidth]{img/qr-wechat.png}
-  \caption{FreeSWITCH-CN 微信公众号}
+  \Oldincludegraphics[width=.98\linewidth]{img/qr-wechat.png}
+  \caption{FreeSWITCH-CN}
 \end{subfigure}
 \end{figure}
+```
+
+以下图片仅在HTML中显示，代码如下：
+
+<div>
+<img src="img/xyt1.jpg" alt="小樱桃科技 微信公众号">
+<img src="img/qr-wechat.png" alt="FreeSWITCH-CN微信公众号">
+</div>
+
+```html
+<div>
+<img src="img/xyt1.jpg" alt="小樱桃科技 微信公众号">
+<img src="img/qr-wechat.png" alt="FreeSWITCH-CN微信公众号">
+</div>
 ```
 
 ## FreeSWITCH相关图书 {- #books}
