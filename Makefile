@@ -67,6 +67,7 @@ docx: out preface.tex $(SRC)
 	$(PANDOC) -s --toc \
 	--number-sections \
 	--lua-filter=diagram-generator.lua \
+	--lua-filter=docx-figure-number.lua \
 	-o out/技术图书排版-$(VER).docx \
 	README.md $(SRC)
 
@@ -78,13 +79,17 @@ html: $(SRC)
 	--split-level 1 \
 	--number-sections \
 	-o html \
+	--mathml \
 	--template chunked.html \
 	--variable title="技术图书排版" \
 	--lua-filter diagram-generator.lua \
+	--lua-filter=docx-figure-number.lua \
 	--include-after after.html \
 	README.md $(SRC)
 	cp img/circle.webm html/img/
 	cp img/typesetting*.png html/img/
+	cp img/xyt1.jpg html/img/
+	cp img/qr-wechat.png html/img/
 
 cover:
 	$(PANDOC) -s --variable documentclass="report" \

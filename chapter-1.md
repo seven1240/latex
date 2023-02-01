@@ -136,7 +136,7 @@ docker:
 
 读到这里，如果你还是不理解Makefile，可以参考笔者的另一篇文章《[Makefile极速入门](https://docs.xswitch.cn/xpedia/makefile/)》。
 
-## `meta.md`
+## meta.md
 
 `meta.md`里面定义了一些变量，YAML格式。这些变量在主模板文件中会用到。
 
@@ -152,11 +152,38 @@ verbatim-in-note: true
 ---
 ```
 
-## `diagram-generator.lua`
+## diagram-generator.lua
 
 这是一个Lua脚本，用于将以`graphviz`和`mscgen`标记的代码块转换成图片。
 
-## `cover.tex`
+## webp.lua
+
+这也是一个Lua脚本，由于Latex不支持`webp`格式的图片，替换成一段说明。这主要是为了使用同一个Markdown源文件适配PDF和HTML的情况。
+
+
+```lua
+-- 实现一个函数判断字符串是否以某个字符串结尾
+function string:endswith(ending)
+    return ending == "" or self:sub(-#ending) == ending
+end
+
+-- 对每一个图片，将自动调用如下函数，该函数仅对latex格式生效
+function Image(img)
+    if FORMAT ~= "latex" then return end
+
+    if img.src:endswith(".webp") then
+        return pandoc.Str("!PDF版不支持该类型的图片[webp image]！")
+    end
+end
+```
+
+## docx-figure-number.lua
+
+Lua脚本，仅用于`docx`格式的文件，为图片添加编号。
+
+Pandoc虽然有native-numbering选项，但是对于图片编号不能区分章节。
+
+## cover.tex
 
 我们先从这个文件熟悉一下LaTex的语法。你不需要精通LaTex，但学一点总是有好处。
 
@@ -245,7 +272,7 @@ LaTex的语法比较奇怪，还是那句话，懂不懂没关系（因为模板
 
 不过瘾？下面再来一个。
 
-## `cover-std.tex`
+## cover-std.tex
 
 这个文件其实跟`cover.tex`差不多，只是调整了一些尺寸，看看`diff`吧：
 
@@ -283,7 +310,7 @@ $ diff cover.tex cover-std.tex
 < \end{adjustwidth}
 ```
 
-## `header.tex`
+## header.tex
 
 嗯，标准的书上都有个『图书在版编目（CIP）数据』，我们的书还没有出版，就加上个『不』吧。
 

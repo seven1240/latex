@@ -22,14 +22,16 @@ $endif$
 \usepackage{float}
 \usepackage{fontspec}
 \newcommand\mainfont{Noto Sans CJK SC DemiLight}
+\newcommand\boldfont{Noto Sans CJK SC Bold}
+\newcommand\itfont{Smiley Sans}
 \newcommand\kaifont{Adobe Kaiti Std}
 \newcommand\fangsong{Adobe Kaiti Std}
-\setmainfont[BoldFont=Noto Sans CJK SC Bold,ItalicFont={\kaifont}]{\mainfont}
+\setmainfont[BoldFont=\boldfont,ItalicFont={\kaifont}]{\mainfont}
 \newfontfamily\kai{\kaifont}
 \newfontfamily\fs{\fangsong}
-\newfontfamily\zhfont[BoldFont=Noto Sans CJK SC Bold,ItalicFont={\kaifont}]{\mainfont}
-\newfontfamily\zhpunctfont[BoldFont=Noto Sans CJK SC Bold]{\mainfont}
-\setromanfont[Mapping=tex-text,BoldFont=Noto Sans CJK SC Bold,ItalicFont=Source Code Pro Italic]{\mainfont}
+\newfontfamily\zhfont[BoldFont=\boldfont,ItalicFont={\kaifont}]{\mainfont}
+\newfontfamily\zhpunctfont[BoldFont=\boldfont]{\mainfont}
+\setromanfont[Mapping=tex-text,BoldFont=\boldfont,ItalicFont=\itfont]{\mainfont}
 \setmonofont{Noto Sans Mono CJK SC}
 % \setmonofont{Source Code Pro}
 % \renewcommand{\bfdefault}{sb}
@@ -171,6 +173,13 @@ $endif$
 
 % \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
+% \usepackage{empheq,mathtools}
+% \usepackage{mdsymbol}
+% \usepackage{mathtools}
+% \usepackage{amsmath}
+\usepackage{esint}
+% \usepackage[charter]{mathdesign}
+% \usepackage{euscript}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
 % use microtype if available
@@ -290,7 +299,8 @@ $if(graphics)$
 \else\Gin@nat@height\fi}
 \makeatother
 \let\Oldincludegraphics\includegraphics
-\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth,height=\amaxheight,keepaspectratio]{#1}}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth,height=\amaxheight,keepaspectratio]{#1}}
 % hack figure to position figure at Here!
 \makeatletter
 \renewcommand\fps@figure{H}
@@ -350,6 +360,11 @@ $endif$
 \newcommand{\theauthor}{$author$}
 \newcommand{\theauthors}{$author$}
 \newcommand{\thepublisher}{$publisher$}
+
+\renewcommand {\thetable} {\thechapter{}-\arabic{table}}
+\renewcommand {\thefigure} {\thechapter{}-\arabic{figure}}
+% \renewcommand {\thelisting} {\thechapter{}-\arabic{listing}}
+\renewcommand {\theequation} {\thechapter{}-\arabic{equation}}
 
 % fix --listing missing passthrough https://github.com/laboon/ebook/issues/139
 % \newcommand{\passthrough}[1]{\lstset{mathescape=false}\color{red}#1\color{black}\lstset{mathescape=true}}

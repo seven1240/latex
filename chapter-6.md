@@ -1,6 +1,6 @@
 # Pandoc安装与使用 {#pandoc}
 
-我一般都使用Pandoc将Markdown文件生成PDF与HTML。这些简单记录一下我的安装和使用经验，供参考。
+我一般都使用Pandoc将Markdown文件生成PDF与HTML。这里简单记录一下我的安装和使用经验，供参考。
 
 ## 安装Pandoc
 
@@ -160,7 +160,6 @@ REPOSITORY                           TAG         IMAGE ID      SIZE
 ccr.ccs.tencentyun.com/free/pandoc   3.0.1       3e18c37be4e3  1.1GB
 ccr.ccs.tencentyun.com/free/pandoc   tiny-3.0.1  8cc1f2bb499b  829MB
 ccr.ccs.tencentyun.com/free/pandoc   tiny        bebbeee87788  719MB
-ccr.ccs.tencentyun.com/free/pandoc   alpine      a3fa5a20c136  42.9MB
 ccr.ccs.tencentyun.com/free/pandoc   latest      3036623e1d31  913MB
 ccr.ccs.tencentyun.com/free/pandoc   m1          81902b42b585  849MB
 ccr.ccs.tencentyun.com/free/pandoc   multiarch   ac93363c5ab3  739MB

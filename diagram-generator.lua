@@ -120,7 +120,13 @@ local function graphviz(code, filetype)
 end
 
 local function twopi(code, filetype)
-  local final = pandoc.pipe(twopiPath, {"-T" .. filetype, "-Gdpi=300"}, code)
+  local dpi = ""
+  if FORMAT == "chunkedhtml" then
+      dpi = "-Gdpi=72"
+  else
+      dpi = "-Gdpi=300"
+  end
+  local final = pandoc.pipe(twopiPath, {"-T" .. filetype, dpi}, code)
   return final
 end
 
@@ -363,9 +369,11 @@ function CodeBlock(block)
   local converters = {
     plantuml = plantuml,
     graphviz = graphviz,
+    twopi = twopi,
     tikz = tikz2image,
     py2image = py2image,
     asymptote = asymptote,
+    msc = mscgen,
   }
 
   -- Check if a converter exists for this block. If not, return the block
