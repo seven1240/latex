@@ -1,8 +1,8 @@
 # 技术图书排版 {#typesetting}
 
-欢迎来到排版世界。我们用Markdown[^markdown]格式写作，用LaTex模板排版，用Pandoc做格式转换。
+欢迎来到排版世界。我们用Markdown[^markdown-1]格式写作，用LaTex模板排版，用Pandoc做格式转换。
 
-[^markdown]: <https://docs.xswitch.cn/xpedia/markdown/> 。
+[^markdown-1]: <https://docs.xswitch.cn/xpedia/markdown/> 。
 
 Markdown是一个文档格式，它是基于纯文本的，通过简单的格式约定，既做到源文件易读，又做到可以支持一些基本的格式。本文就是用Markdown写成的。
 
