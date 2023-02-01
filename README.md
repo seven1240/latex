@@ -1,4 +1,4 @@
-# 前　言 {- #forword}
+# 前　言 {- #foreword}
 
 我出过两本书——《FreeSWITCH权威指南》和《Kamailio实战》，也写过很多FreeSWITCH相关的电子书。有读者问我是怎么排版的，不揣鄙陋，愿与大家分享。
 
