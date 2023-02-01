@@ -79,6 +79,15 @@ html: $(SRC)
 	--include-after after.html \
 	README.md $(SRC)
 
+cover:
+	$(PANDOC) -s --variable documentclass="report" \
+	--template template.tex \
+	--pdf-engine=xelatex \
+	--variable mobile=true \
+	-o out/cover.pdf \
+	--include-in-header=cover.tex \
+	meta.md
+
 docker:
 	docker run --rm -it -v `PWD`:/team ccr.ccs.tencentyun.com/free/pandoc:tiny bash
 
