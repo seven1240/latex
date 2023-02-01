@@ -28,7 +28,7 @@ Word有一个功能确实不大好替代，那就是『修订』功能，使用�
 * 提供Word版方便与其它人交流；
 * 还可以生成EPUB电子书等其它格式，欢迎提pr。
 
-本书是可以『自举』的，也就是说你可以通过本书的源代码生成本书的PDF。参见：<https://github.com/seven1240/latex> 。你也可以访问本书生成的HTML：<http://www.freeswitch.org.cn/books/typesetting/> 。
+本书是可以『自举』的，也就是说你可以通过本书的源代码生成本书的PDF，参见：<https://github.com/seven1240/latex> （**注意**：PDF版不会实时更新，可能会比较旧）。你也可以访问本书生成的HTML：<http://www.freeswitch.org.cn/books/typesetting/> 。
 
 最后，本书写作的目的并不是教你成为一个排版专家，相反，希望通过分享我的排版模板，让广大技术人员专注于用自己喜欢的工具写好自己的作品，忘记排版 ;)。
 
