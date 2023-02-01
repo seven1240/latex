@@ -1,4 +1,4 @@
-# 插图
+# 插图 {#figures}
 
 通过`diagram-generator.lua`，可以直接在Markdown中内嵌流程图。如下面的代码可以生成一个有向图：
 

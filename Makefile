@@ -65,5 +65,23 @@ docx: out preface.tex $(SRC)
 	-o out/技术图书排版-$(VER).docx \
 	README.md $(SRC)
 
+.PHONY: html
+html: $(SRC)
+	rm -rf html
+	$(PANDOC) -s --toc \
+	-t chunkedhtml \
+	--split-level 1 \
+	--number-sections \
+	-o html \
+	--template chunked.html \
+	--variable title="技术图书排版" \
+	--lua-filter diagram-generator.lua \
+	--include-after after.html \
+	README.md $(SRC)
+
 docker:
 	docker run --rm -it -v `PWD`:/team ccr.ccs.tencentyun.com/free/pandoc:tiny bash
+
+install:
+	@echo upload to freeswitch.org.cn
+	rsync --exclude=.DS_Store -rvz html/* root@www.freeswitch.org.cn:/var/www/freeswitch.org.cn/_site/books/typesetting/

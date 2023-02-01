@@ -1,4 +1,4 @@
-# 我在Mac上的写作工具链
+# 我在Mac上的写作工具链 {#writing-tools}
 
 > 杜金房/2015.08.13/来自FreeSWITCH-CN公众号
 
