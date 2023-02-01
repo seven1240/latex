@@ -10,6 +10,7 @@ SRC = meta.md \
 	chapter-3.md \
 	chapter-4.md \
 	chapter-5.md \
+	chapter-6.md \
 	postface.md
 
 preface.tex: README.md
@@ -94,7 +95,7 @@ cover:
 	meta.md
 
 docker:
-	docker run --rm -it -v `PWD`:/team ccr.ccs.tencentyun.com/free/pandoc:tiny bash
+	docker run --rm -it -v `PWD`:/team ccr.ccs.tencentyun.com/free/pandoc:tiny-3.0.1 bash
 
 install:
 	@echo upload to freeswitch.org.cn
