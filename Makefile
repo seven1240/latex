@@ -84,6 +84,7 @@ html: $(SRC)
 	--include-after after.html \
 	README.md $(SRC)
 	cp img/circle.webm html/img/
+	cp img/typesetting*.png html/img/
 
 cover:
 	$(PANDOC) -s --variable documentclass="report" \
@@ -92,6 +93,13 @@ cover:
 	--variable mobile=true \
 	-o out/cover.pdf \
 	--include-in-header=cover.tex \
+	meta.md
+
+	$(PANDOC) -s --variable documentclass="report" \
+	--template template.tex \
+	--pdf-engine=xelatex \
+	-o out/cover2.pdf \
+	--include-in-header=cover-std.tex \
 	meta.md
 
 docker:
