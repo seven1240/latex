@@ -1,4 +1,4 @@
-# 技术图书排版
+# 技术图书排版 {#typesetting}
 
 欢迎来到排版世界。我们用Markdown[^markdown]格式写作，用LaTex模板排版，用Pandoc做格式转换。
 

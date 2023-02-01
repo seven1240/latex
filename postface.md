@@ -1,4 +1,4 @@
-# 写在最后 {-}
+# 写在最后 {- #last}
 
 到此，我们该写一个后记了。如果你查看源文件，你可以看到从这里开始的相关的章节名字后面有`{-}`标记，它告诉LaTex按章节排版但不再生成章节号。
 
@@ -22,7 +22,7 @@ LaTex的学习曲线也是很陡的，而且在LaTex中处理中文，就需要�
 不知 | 有没有办法宽度100%
 
 
-# 作者简介 {-}
+# 作者简介 {- #author}
 
 **杜金房**：（网名：Seven Du），《FreeSWITCH权威指南》[^fsdg]、《Kamailio实战》作者、FreeSWITCH中文社区[^fscn]创始人，FreeSWITCH开源项目[^freeswitch]核心Committer，开源爱好者。北京信悦通科技和烟台小樱桃科技[^xyt]创始人。腾讯云TVP。
 
@@ -31,13 +31,13 @@ LaTex的学习曲线也是很陡的，而且在LaTex中处理中文，就需要�
 [^freeswitch]: <https://freeswitch.com>
 [^xyt]: <http://x-y-t.cn>
 
-# 版权声明 {-}
+# 版权声明 {- #copyright}
 
 本书版权归作者所有，保留所有权利。本书相关的模板代码采用创作共用CC-BY-SA[^cc]发布。
 
 [^cc]: [https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0协议文本>](https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC)
 
-# 广告 {-}
+# 广告 {- #ad}
 
 ## 关于广告的广告 {-}
 
@@ -58,7 +58,7 @@ XSwitch是一个SSaaS（Soft-Switch as a Service）平台，可以用来：
 
 支持私有化部署。
 
-## 技术支持 {-}
+## 技术支持 {- #support}
 
 烟台小樱桃网络科技有限公司提供商业FreeSWITCH、OpenSIPS及Kamailio技术支持。
 
@@ -97,20 +97,22 @@ XSwitch是一个SSaaS（Soft-Switch as a Service）平台，可以用来：
 \end{figure}
 ```
 
-## FreeSWITCH相关图书 {-}
+## FreeSWITCH相关图书 {- #books}
 
 * 《FreeSWITCH文集》收集了一些FreeSWITCH文章，相比其它FreeSWITCH书来说，技术内容比较少，便于非技术人员快速了解FreeSWITCH。
-* 《FreeSWITCH互联互通》主要收集了一些互联互通的例子。书中有些例子来自《FreeSWITCH权威指南》。
+* 《FreeSWITCH互联互通》主要收集了一些互联互通的例子，书中有些例子来自《FreeSWITCH权威指南》。
 * 《FreeSWITCH实例解析》收集了一些如何使用FreeSWITCH的实际例子，方便读者参考。书中有些内容来自《FreeSWITCH权威指南》。
-* 《FreeSWITCH实战》是《FreeSWITCH权威指南》的前身，不再更新，但该书有其历史意义。
-* 《FreeSWITCH WIRESHARK》是一本介绍如果用Wireshark分析SIP/RTP数据包的书。
-* 《FreeSWITCH源代码分析》，讲源代码。
-* 《FreeSWITCH权威指南》是正式出版的纸质书和电子书，2014年出版。
-* 《Kamailio实战》是作者新写的又一本新书，2022年出版。
+* 《FreeSWITCH：VoIP实战》是《FreeSWITCH权威指南》的前身，不再更新，但该书是很好的入门书且有其历史意义。
+* 《FreeSWITCH WIRESHARK》 是一本介绍如何使用Wireshark分析SIP/RTP数据包的书。
+* 《FreeSWITCH源代码分析》主要讲解源代码。
+* 《FreeSWITCH权威指南》是正式出版的纸质书和电子书，出版于2014年。
+* 《[FreeSWITCH案例大全](http://www.freeswitch.org.cn/books/case-study/)》是一本多人贡献的电子书，收集了很多FreeSWITCH实用案例，免费在线阅读。
+* 《[FreeSWITCH参考手册](http://www.freeswitch.org.cn/books/references)》是一本多人贡献的电子书，收集了很多FreeSWITCH实用参考，免费在线阅读。
+* 《Kamailio实战》是关于Kamailio Proxy Server的书，与FreeSWITCH一起学习事半功倍。
 
 以上所有图书均可以在 <http://book.dujinfang.com> 查看最新信息及购买。FreeSWITCH VIP知识星球里面也有部分电子书。
 
-## 知识星球 {-}
+## 知识星球 {- #zsxq}
 
 杜老师维护着两个知识星球，一个免费版，一个收费版。可以使用如下链接或通过微信扫描二维码加入。
 
