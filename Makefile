@@ -9,6 +9,7 @@ SRC = meta.md \
 	chapter-2.md \
 	chapter-3.md \
 	chapter-4.md \
+	chapter-5.md \
 	postface.md
 
 preface.tex: README.md
@@ -28,6 +29,7 @@ book: out preface.tex $(SRC)
 	--include-before=header.tex \
 	--include-before-body=preface.tex \
 	--lua-filter=diagram-generator.lua \
+	--lua-filter=webp.lua \
 	-o out/技术图书排版-标准版-$(VER).pdf \
 	$(SRC)
 
@@ -41,6 +43,7 @@ mobile: out preface.tex $(SRC)
 	--include-before=header.tex \
 	--include-before-body=preface.tex \
 	--lua-filter=diagram-generator.lua \
+	--lua-filter=webp.lua \
 	-o out/技术图书排版-移动版-$(VER).pdf \
 	$(SRC)
 
@@ -55,6 +58,7 @@ print: out preface.tex $(SRC)
 	--include-before=header.tex \
 	--include-before-body=preface.tex \
 	--lua-filter=diagram-generator.lua \
+	--lua-filter=webp.lua \
 	-o out/技术图书排版-印刷版-$(VER).pdf \
 	$(SRC)
 
@@ -78,6 +82,7 @@ html: $(SRC)
 	--lua-filter diagram-generator.lua \
 	--include-after after.html \
 	README.md $(SRC)
+	cp img/circle.webm html/img/
 
 cover:
 	$(PANDOC) -s --variable documentclass="report" \
