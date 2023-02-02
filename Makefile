@@ -80,8 +80,10 @@ html: $(SRC)
 	--number-sections \
 	-o html \
 	--mathml \
+	--highlight-style tango \
 	--template chunked.html \
 	--variable title="技术图书排版" \
+	--variable description-meta="《技术图书排版》，开源免费电子书。" \
 	--lua-filter diagram-generator.lua \
 	--lua-filter=docx-figure-number.lua \
 	--include-after after.html \

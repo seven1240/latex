@@ -22,6 +22,10 @@ $endif$
     span.navlink { flex: 1; }
     span.navlink-label { display: inline-block; min-width: 4em; }
     $styles.html()$
+    body { font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC ,WenQuanYi Micro Hei, sans-serif;}
+    code { color: navy }
+    a { color: #ef1aa4; text-decoration: none; }
+    a:visited { color: #ef1aa4; text-decoration: none; }
   </style>
 $for(css)$
   <link rel="stylesheet" href="$css$" />
@@ -93,6 +97,23 @@ $table-of-contents$
 </nav>
 $endif$
 $body$
+
+<hr>
+<nav id="sitenavbottom">
+  <div class="sitenav">
+    <span class="navlink">
+    $if(previous.url)$
+    <span class="navlink-label">上一节:</span> <a href="$previous.url$" accesskey="p" rel="previous">$previous.title$</a>
+    $endif$
+    </span>
+    <span class="navlink">
+    $if(next.url)$
+    <span class="navlink-label">下一节:</span> <a href="$next.url$" accesskey="n" rel="next">$next.title$</a>
+    $endif$
+    </span>
+  </div>
+</nav>
+
 $for(include-after)$
 $include-after$
 $endfor$
