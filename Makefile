@@ -2,7 +2,7 @@ PANDOC := pandoc
 
 all: mobile book print docx
 
-VER=8
+VER=9
 
 SRC = meta.md \
 	chapter-1.md \
