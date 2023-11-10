@@ -46,18 +46,22 @@ $endfor$
 <span class="navlink">
 $if(top)$
 <span class="navlink-label">目　录:</span> <a href="$top.url$" accesskey="t" rel="top">$top.title$</a>
+$else$
+<span class="navlink-label">首　页:</span> <a href="/" accesskey="h" rel="home">返回首页</a>
 $endif$
 </span>
 <span class="navlink">
+<span class="navlink-label">上一级:</span>
 $if(up.url)$
-<span class="navlink-label">上一级:</span> <a href="$up.url$" accesskey="u" rel="up">$up.title$</a>
+<a href="$up.url$" accesskey="u" rel="up">$up.title$</a>
 $endif$
 </span>
 </div>
 <div class="sitenav">
 <span class="navlink">
+<span class="navlink-label">上一节:</span>
 $if(previous.url)$
-<span class="navlink-label">上一节:</span> <a href="$previous.url$" accesskey="p" rel="previous">$previous.title$</a>
+<a href="$previous.url$" accesskey="p" rel="previous">$previous.title$</a>
 $endif$
 </span>
 <span class="navlink">
