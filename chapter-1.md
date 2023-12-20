@@ -1,31 +1,31 @@
 # 技术图书排版 {#typesetting}
 
-欢迎来到排版世界。我们用Markdown[^markdown-1]格式写作，用LaTex模板排版，用Pandoc做格式转换。
+欢迎来到排版世界。我们用 Markdown[^markdown-1]格式写作，用 LaTex 模板排版，用 Pandoc 做格式转换。
 
 [^markdown-1]: <https://docs.xswitch.cn/xpedia/markdown/> 。
 
-Markdown是一个文档格式，它是基于纯文本的，通过简单的格式约定，既做到源文件易读，又做到可以支持一些基本的格式。本文就是用Markdown写成的。
+Markdown 是一个文档格式，它是基于纯文本的，通过简单的格式约定，既做到源文件易读，又做到可以支持一些基本的格式。本文就是用 Markdown 写成的。
 
-Pandoc[^pandoc]是一个文档转换工具，是一个瑞士军刀。它可以在各种文档格式间转换，在此我们会将我们的Markdown文件转换成PDF。
+Pandoc[^pandoc]是一个文档转换工具，是一个瑞士军刀。它可以在各种文档格式间转换，在此我们会将我们的 Markdown 文件转换成 PDF。
 
 [^pandoc]: <https://pandoc.org/>
 
-LaTex[^latex]是世界上最先进的排版系统，在文档转换过程中，我们会用到LaTex。推荐安装TexLive[^texlive]，但完整版安装包有4个多G，太大了，所以一般安装BasicTex就够了，这个版本比较小，但宏包不全，遇到有缺少的宏包可以后续用`tlmgr install 包名`命令安装。
+LaTex[^latex]是世界上最先进的排版系统，在文档转换过程中，我们会用到 LaTex。推荐安装 TexLive[^texlive]，但完整版安装包有 4 个多 G，太大了，所以一般安装 BasicTex 就够了，这个版本比较小，但宏包不全，遇到有缺少的宏包可以后续用`tlmgr install 包名`命令安装。
 
 [^latex]: <https://www.latex-project.org/>
 [^texlive]: <http://www.tug.org/mactex/morepackages.html>
 
-本书是在Mac上编译的，笔者也制作了个Docker镜象方便大家使用，参见下一节。
+本书是在 Mac 上编译的，笔者也制作了个 Docker 镜象方便大家使用，参见下一节。
 
-这是本书的第一章。到此，章节、段落、脚注、链接等写法你都已经看到了（当然，如果你阅读的是PDF的话，你需要看一下源文件）。下面，我们看下本书中用到的一些文件。
+这是本书的第一章。到此，章节、段落、脚注、链接等写法你都已经看到了（当然，如果你阅读的是 PDF 的话，你需要看一下源文件）。下面，我们看下本书中用到的一些文件。
 
 ## Makefile
 
-关于Pandoc的用法我们不会详细解释，感兴趣的应该去看官方网站上的文档，我们只是解释一下我用到的一些命令。
+关于 Pandoc 的用法我们不会详细解释，感兴趣的应该去看官方网站上的文档，我们只是解释一下我用到的一些命令。
 
-先看Makefile。好吧，我们需要先学习一下Makefile。
+先看 Makefile。好吧，我们需要先学习一下 Makefile。
 
-Makefile不是必需的，但作为一名程序员，它是一个很方便使用的工具。
+Makefile 不是必需的，但作为一名程序员，它是一个很方便使用的工具。
 
 首先定义了一个变量，`PANDOC`就指向`pandoc`可执行文件，如果在不同的系统上使用，可以更新路径。
 
@@ -48,9 +48,9 @@ SRC = meta.md \
 	postface.md
 ```
 
-先来个小目标;)，`preface.tex`是一个小目标，是『前言』部分。因为我们希望前言能在目录的前面，所以我们需要一个`tex`文件，但我们还是想用Markdown格式写，所以，我们会把`README.md`转换成`tex`并插入到文档相应的位置。
+先来个小目标;)，`preface.tex`是一个小目标，是『前言』部分。因为我们希望前言能在目录的前面，所以我们需要一个`tex`文件，但我们还是想用 Markdown 格式写，所以，我们会把`README.md`转换成`tex`并插入到文档相应的位置。
 
-其中`-s`为Smart的意思（嗯，欲知详情看官方文档），`--variable`为变量，设置LaTex的文档格式，后面我们会有模板文件中看到。`--template`选择一个模板，在此，我们自创了一个空模板，它会生成不带模板的LaTex文件。好吧，如果听不明白也没关系，你可以看一下生成的这个文件的内容，初步了解一下LaTex的格式。
+其中`-s`为 Smart 的意思（嗯，欲知详情看官方文档），`--variable`为变量，设置 LaTex 的文档格式，后面我们会有模板文件中看到。`--template`选择一个模板，在此，我们自创了一个空模板，它会生成不带模板的 LaTex 文件。好吧，如果听不明白也没关系，你可以看一下生成的这个文件的内容，初步了解一下 LaTex 的格式。
 
 ```makefile
 preface.tex: README.md
@@ -59,14 +59,14 @@ preface.tex: README.md
 	-o preface.tex README.md
 ```
 
-`out`是一个目标，这就是Makefile的魔术，如果没有这个目标文件夹，就执行下面的`mkdir`命令创建它。再次说明，Pandoc并不依赖于Makefile，你可以手工执行命令创建这个文件夹，但是我们使用Makefile只是为了方便。
+`out`是一个目标，这就是 Makefile 的魔术，如果没有这个目标文件夹，就执行下面的`mkdir`命令创建它。再次说明，Pandoc 并不依赖于 Makefile，你可以手工执行命令创建这个文件夹，但是我们使用 Makefile 只是为了方便。
 
 ```makefile
 out:
 	mkdir out
 ```
 
-`book`是我们标准的目标，它会生成一个PDF文件（通过`-o`指定）。`--toc`是`Table of Content`，即自动生成图书目录。这里的`template.tex`是我们的模板文件，后面我们还会详细讲。`--number-sections`自动生成章节号。`pdf-engine`我们选`xelatex`，对中文比较友好，另一个选项是`pdflatex`，但对中文支持稍差点。`--include-xxx`表示将相关文件插入到模板文件相应的位置。
+`book`是我们标准的目标，它会生成一个 PDF 文件（通过`-o`指定）。`--toc`是`Table of Content`，即自动生成图书目录。这里的`template.tex`是我们的模板文件，后面我们还会详细讲。`--number-sections`自动生成章节号。`pdf-engine`我们选`xelatex`，对中文比较友好，另一个选项是`pdflatex`，但对中文支持稍差点。`--include-xxx`表示将相关文件插入到模板文件相应的位置。
 
 ```makefile
 book: out preface.tex $(SRC)
@@ -82,7 +82,7 @@ book: out preface.tex $(SRC)
 	$(SRC)
 ```
 
-标准版是A4的纸张，在手机上显示不适合阅读，我们生成个移动版的，设置纸张大小为`9 x 16cm`，即对于`16:9`的手机屏幕，刚好显示一页。在此，我们传入了一个`mobile=true`参数。
+标准版是 A4 的纸张，在手机上显示不适合阅读，我们生成个移动版的，设置纸张大小为`9 x 16cm`，即对于`16:9`的手机屏幕，刚好显示一页。在此，我们传入了一个`mobile=true`参数。
 
 ```makefile
 mobile: out preface.tex $(SRC)
@@ -99,7 +99,7 @@ mobile: out preface.tex $(SRC)
 	$(SRC)
 ```
 
-图书是要出版的，一般出版的尺寸不会是A4的，所以要设置不同的尺寸，另外，出版图书跟电子阅读的版本还有一个重要的区别是奇偶页不同（页边距和页码位置等），我们加了个`print`变量控制打印的格式。看了这么多年书，你有没有注意到这个问题呢？
+图书是要出版的，一般出版的尺寸不会是 A4 的，所以要设置不同的尺寸，另外，出版图书跟电子阅读的版本还有一个重要的区别是奇偶页不同（页边距和页码位置等），我们加了个`print`变量控制打印的格式。看了这么多年书，你有没有注意到这个问题呢？
 
 ```makefile
 print: out preface.tex $(SRC)
@@ -117,7 +117,7 @@ print: out preface.tex $(SRC)
 	$(SRC)
 ```
 
-为了照顾那些顽固地想看Word版的人，我们增加了一个`make docx`，就可以直接生成Word版了。
+为了照顾那些顽固地想看 Word 版的人，我们增加了一个`make docx`，就可以直接生成 Word 版了。
 
 ```makefile
 docx: out preface.tex $(SRC)
@@ -127,18 +127,18 @@ docx: out preface.tex $(SRC)
 	README.md $(SRC)
 ```
 
-如果你本地没有安装Pandoc以及LaTex环境，可以使用笔者制作的Docker镜象。在命令行上执行`make docker`会进入一个Docker容器中，并把当前目录映射到`/team`目录中，然后就可以继续`make`生成PDF了。
+如果你本地没有安装 Pandoc 以及 LaTex 环境，可以使用笔者制作的 Docker 镜象。在命令行上执行`make docker`会进入一个 Docker 容器中，并把当前目录映射到`/team`目录中，然后就可以继续`make`生成 PDF 了。
 
 ```makefile
 docker:
 	docker run --rm -it -v `PWD`:/team ccr.ccs.tencentyun.com/free/pandoc:multiarch bash
 ```
 
-读到这里，如果你还是不理解Makefile，可以参考笔者的另一篇文章《[Makefile极速入门](https://docs.xswitch.cn/xpedia/makefile/)》。
+读到这里，如果你还是不理解 Makefile，可以参考笔者的另一篇文章《[Makefile 极速入门](https://docs.xswitch.cn/xpedia/makefile/)》。
 
 ## meta.md
 
-`meta.md`里面定义了一些变量，YAML格式。这些变量在主模板文件中会用到。
+`meta.md`里面定义了一些变量，YAML 格式。这些变量在主模板文件中会用到。
 
 ```yaml
 ---
@@ -154,12 +154,11 @@ verbatim-in-note: true
 
 ## diagram-generator.lua
 
-这是一个Lua脚本，用于将以`graphviz`和`mscgen`标记的代码块转换成图片。
+这是一个 Lua 脚本，用于将以`graphviz`和`mscgen`标记的代码块转换成图片。
 
 ## webp.lua
 
-这也是一个Lua脚本，由于Latex不支持`webp`格式的图片，替换成一段说明。这主要是为了使用同一个Markdown源文件适配PDF和HTML的情况。
-
+这也是一个 Lua 脚本，由于 Latex 不支持`webp`格式的图片，替换成一段说明。这主要是为了使用同一个 Markdown 源文件适配 PDF 和 HTML 的情况。
 
 ```lua
 -- 实现一个函数判断字符串是否以某个字符串结尾
@@ -179,17 +178,17 @@ end
 
 ## docx-figure-number.lua
 
-Lua脚本，仅用于`docx`格式的文件，为图片添加编号。
+Lua 脚本，仅用于`docx`格式的文件，为图片添加编号。
 
-Pandoc虽然有native-numbering选项，但是对于图片编号不能区分章节。
+Pandoc 虽然有 native-numbering 选项，但是对于图片编号不能区分章节。
 
 ## cover.tex
 
-我们先从这个文件熟悉一下LaTex的语法。你不需要精通LaTex，但学一点总是有好处。
+我们先从这个文件熟悉一下 LaTex 的语法。你不需要精通 LaTex，但学一点总是有好处。
 
-这是本书的封面，如果读到这里，你应该已经看到这个封面了。简单起见，我直接用了《FreeSWITCH文集》的封面。虽然我们可以直接用个PNG或JPEG图片做封面，但是作为一名程序员，我还是喜欢用代码生成封面，尽量少地依赖PhotoShop之类的软件。
+这是本书的封面，如果读到这里，你应该已经看到这个封面了。简单起见，我直接用了《FreeSWITCH 文集》的封面。虽然我们可以直接用个 PNG 或 JPEG 图片做封面，但是作为一名程序员，我还是喜欢用代码生成封面，尽量少地依赖 PhotoShop 之类的软件。
 
-我们使用`tikz`宏包，嗯，它是在LaTex里画图用的。类似于程序语言中的模块，LaTex使用宏包扩展本身的功能。其中`%`是注释。如果把`texcoord`那行注释去掉，可以看到一些参考线。
+我们使用`tikz`宏包，嗯，它是在 LaTex 里画图用的。类似于程序语言中的模块，LaTex 使用宏包扩展本身的功能。其中`%`是注释。如果把`texcoord`那行注释去掉，可以看到一些参考线。
 
 ```tex
 \usepackage{tikz}
@@ -216,7 +215,7 @@ Pandoc虽然有native-numbering选项，但是对于图片编号不能区分章�
 \color{white}
 ```
 
-设置这是一个『空』（`empty`）页面（告诉LaTex不需要自动生成页码之类的），居中，写上『FreeSWITCH』，加上`wenji.png`，这是一个图片，然后写上作者。
+设置这是一个『空』（`empty`）页面（告诉 LaTex 不需要自动生成页码之类的），居中，写上『FreeSWITCH』，加上`wenji.png`，这是一个图片，然后写上作者。
 
 ```tex
 \thispagestyle{empty}
@@ -244,7 +243,7 @@ Pandoc虽然有native-numbering选项，但是对于图片编号不能区分章�
 \end{textblock*}
 ```
 
-`bigskip`会自动填充中间的空间，然后在下面画一个文本框放上一些装饰文本（笔者是做SIP通信的，因此放了一段SIP消息）。
+`bigskip`会自动填充中间的空间，然后在下面画一个文本框放上一些装饰文本（笔者是做 SIP 通信的，因此放了一段 SIP 消息）。
 
 ```tex
 \bigskip
@@ -268,7 +267,7 @@ Contact: <sip:seven@xswitch.cn;transport=tls>
 }
 ```
 
-LaTex的语法比较奇怪，还是那句话，懂不懂没关系（因为模板我已经写好了啊，除非你要做自己的封面 ;)）。
+LaTex 的语法比较奇怪，还是那句话，懂不懂没关系（因为模板我已经写好了啊，除非你要做自己的封面 ;)）。
 
 不过瘾？下面再来一个。
 

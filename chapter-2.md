@@ -2,7 +2,7 @@
 
 `template.tex`是我们的主模板。之所以我们将封面等模板放到其它的文件里，是因为这样会便于用一套模板做不同的书。
 
-Latex文档的开头叫导言区（Preamble），定义了纸张及其它排版的参数。`if-else`之类的条件判断是Pandoc加上去的，它会根据命令行上输入的参数不同选择不同的设置，比如一般的图书用`report`，而一篇文章则用`article`。你也可以看到，如果有`print`参数生成可以印刷图书的话，那就会加上`twoside,openright`以支持双面打印，以及奇偶而不同之类。
+Latex 文档的开头叫导言区（Preamble），定义了纸张及其它排版的参数。`if-else`之类的条件判断是 Pandoc 加上去的，它会根据命令行上输入的参数不同选择不同的设置，比如一般的图书用`report`，而一篇文章则用`article`。你也可以看到，如果有`print`参数生成可以印刷图书的话，那就会加上`twoside,openright`以支持双面打印，以及奇偶而不同之类。
 
 ```tex
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$CJKutf8$if(print)$,twoside,openright$endif$]{$documentclass$}
@@ -32,13 +32,13 @@ $endif$
 $endif$
 ```
 
-跟字体相关的设置。我们使用了谷歌的思源CJK（中日韩文）字体[^noto-fonts]。嗯，因为该字体是开源的。如果你使用其它字体嵌入到PDF中，要注意字体的版权问题。
+跟字体相关的设置。我们使用了谷歌的思源 CJK（中日韩文）字体[^noto-fonts]。嗯，因为该字体是开源的。如果你使用其它字体嵌入到 PDF 中，要注意字体的版权问题。
 
 [^noto-fonts]: <https://www.google.com/get/noto/>
 
-`mainfont`是主字体，`monofont`是等宽字体，`romanfont`就是英文相关的代码相关的字体，我们实验性地使用了Adobe的Source Code Pro，因为它有斜体（Italic），注意中文是没有斜体的，我们用楷体或德意黑体[^smiley-sans]代替。所有用到的字体都已经打包到了Docker镜象里，如果你不使用Docker，你需要下载并安装这些字体。可以从它们的官方网站上找找，或者到<https://github.com/seven1240/font>上面找。
+`mainfont`是主字体，`monofont`是等宽字体，`romanfont`就是英文相关的代码相关的字体，我们实验性地使用了 Adobe 的 Source Code Pro，因为它有斜体（Italic），注意中文是没有斜体的，我们用楷体或德意黑体[^smiley-sans]代替。所有用到的字体都已经打包到了 Docker 镜象里，如果你不使用 Docker，你需要下载并安装这些字体。可以从它们的官方网站上找找，或者到<https://github.com/seven1240/font>上面找。
 
-[^smiley-sans]: 德意黑体是2022年发布的免费开源字体，本身就是按斜体设计的，参见 <https://github.com/atelier-anchor/smiley-sans> 。
+[^smiley-sans]: 德意黑体是 2022 年发布的免费开源字体，本身就是按斜体设计的，参见 <https://github.com/atelier-anchor/smiley-sans> 。
 
 ```tex
 \usepackage{changepage}
@@ -159,7 +159,8 @@ $endif$
 \fvset{frame=lines,framerule=0.4pt,rulecolor=\color{cyan},framesep=3mm}
 % \fvset{commandchars=\\\{\}}
 ```
-Verbatim是代码段的环境。
+
+Verbatim 是代码段的环境。
 
 ```tex
 \RecustomVerbatimEnvironment{verbatim}{Verbatim}{}
@@ -222,7 +223,7 @@ $endif$
 \usepackage{amssymb,amsmath}
 ```
 
-这是Pandoc提供的模板的一些默认设置，没改，也没有深入研究。
+这是 Pandoc 提供的模板的一些默认设置，没改，也没有深入研究。
 
 ```tex
 \usepackage{ifxetex,ifluatex}
@@ -340,7 +341,7 @@ $if(graphics)$
 $endif$
 ```
 
-URL相关的处理，以及其它。
+URL 相关的处理，以及其它。
 
 ```tex
 \usepackage[hyphens]{url}
@@ -501,7 +502,7 @@ $endif$
 \pagenumbering{arabic}
 ```
 
-正文，Markdown的内容全部会转换成Latex格式放到这儿。
+正文，Markdown 的内容全部会转换成 Latex 格式放到这儿。
 
 ```tex
 $body$
