@@ -170,6 +170,10 @@ $endif$
 % for inline code
 \let\Oldtexttt\texttt
 \renewcommand{\texttt}[1]{\Oldtexttt{\,\color{navyblue}#1\color{black}\,}}
+\let\Oldeqopen\(
+\renewcommand{\(}{\Oldeqopen\,\color{navyblue}}
+\let\Oldeqclose\)
+\renewcommand{\)}{\Oldeqclose\,}
 
 % \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
