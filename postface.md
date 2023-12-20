@@ -22,7 +22,11 @@ LaTex 的学习曲线也是很陡的，而且在 LaTex 中处理中文，就需�
 
 # 作者简介 {- #author}
 
-**杜金房**：（网名：Seven Du），《FreeSWITCH 权威指南》[^fsdg]、《Kamailio 实战》作者、FreeSWITCH 中文社区[^fscn]创始人，FreeSWITCH 开源项目[^freeswitch]核心 Committer，开源爱好者。北京信悦通科技和烟台小樱桃科技[^xyt]创始人。腾讯云 TVP。
+**杜金房**：（网名：Seven Du），《FreeSWITCH 权威指南》[^fsdg]、《Kamailio 实战》、《深入理解 FFmpeg》作者、FreeSWITCH 中文社区[^fscn]创始人，FreeSWITCH 开源项目[^freeswitch]核心 Committer，开源爱好者。北京信悦通科技和烟台小樱桃科技[^xyt]创始人。RTE 社区主理人。腾讯云 TVP。
+
+他目前在写一本新书：[《大道至简，给所有人看的编程课》](https://book.dujinfang.com/2023/12/07/dead-simple.html?f=typesetting)。
+
+<https://book.dujinfang.com/2023/12/07/dead-simple.html?f=typesetting>
 
 [^fsdg]: <http://book.dujinfang.com>，2014 年出版。
 [^fscn]: <http://www.freeswitch.org.cn>
@@ -40,6 +44,14 @@ LaTex 的学习曲线也是很陡的，而且在 LaTex 中处理中文，就需�
 ## 关于广告的广告 {-}
 
 请允许我在本书中发布广告。承接其它广告。广告合作联系邮箱：info@x-y-t.cn 。
+
+## 《大道至简，给所有人看的编程课》 {-}
+
+我写过好几本书，但相对而言，那些书都有些太专业、受众太“窄”了。我一直想写一本能惠及“所有人”的编程书。现在，来了。
+
+[《大道至简，给所有人看的编程课》](https://book.dujinfang.com/2023/12/07/dead-simple.html?f=typesetting)。
+
+<https://book.dujinfang.com/2023/12/07/dead-simple.html?f=typesetting>
 
 ## XSwitch {-}
 
