@@ -203,12 +203,16 @@ $if(print)$
 $endif$
 ```
 
-还是代码段环境的一些设置。
+还是代码段环境的一些设置。在行内代码和公式的情况下，两侧加入半个字宽的空格，中英文混排时更好看。
 
 ```tex
 % for inline code
 \let\Oldtexttt\texttt
 \renewcommand{\texttt}[1]{\Oldtexttt{\,\color{navyblue}#1\color{black}\,}}
+\let\Oldeqopen\(
+\renewcommand{\(}{\Oldeqopen\,\color{navyblue}}
+\let\Oldeqclose\)
+\renewcommand{\)}{\Oldeqclose\,}
 ```
 
 数学公式相关。
