@@ -86,6 +86,7 @@ html: $(SRC)
 	--variable description-meta="《技术图书排版》，开源免费电子书。" \
 	--lua-filter diagram-generator.lua \
 	--lua-filter=docx-figure-number.lua \
+	--include-before ad.html \
 	--include-after after.html \
 	README.md $(SRC)
 	cp img/circle.webm html/img/
