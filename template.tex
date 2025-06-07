@@ -1,4 +1,4 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$CJKutf8$if(print)$,twoside,openright$endif$]{$documentclass$}
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(print)$,twoside,openright$endif$]{$documentclass$}
 %,twoside,openright
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
@@ -21,6 +21,13 @@ $endif$
 \usepackage{changepage}
 \usepackage{float}
 \usepackage{fontspec}
+\usepackage{tcolorbox}
+% \newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black}
+\newtcolorbox{redbox}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{greenbox}[1]{colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{bluebox}[1]{colback=blue!5!white,colframe=blue!85!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{cyanbox}[1]{colback=cyan!5!white,colframe=cyan!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{graybox}[1]{colback=gray!5!white,colframe=gray!75!black,fonttitle=\bfseries,title=#1}
 \newcommand\mainfont{Noto Sans CJK SC DemiLight}
 \newcommand\boldfont{Noto Sans CJK SC Bold}
 \newcommand\itfont{Smiley Sans}

@@ -56,6 +56,7 @@ SRC = meta.md \
 preface.tex: README.md
 	$(PANDOC) -s --variable documentclass=report \
 	--template template-dummy.tex \
+	--lua-filter=color-box.lua \
 	-o preface.tex README.md
 ```
 
@@ -123,6 +124,7 @@ print: out preface.tex $(SRC)
 docx: out preface.tex $(SRC)
 	$(PANDOC) -s --toc \
 	--number-sections \
+	--lua-filter=color-box.lua \
 	-o out/技术图书排版-$(VER).docx \
 	README.md $(SRC)
 ```

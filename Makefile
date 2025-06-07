@@ -16,6 +16,7 @@ SRC = meta.md \
 preface.tex: README.md
 	$(PANDOC) -s --variable documentclass=report \
 	--template template-dummy.tex \
+	--lua-filter=color-box.lua \
 	-o preface.tex README.md
 
 out:
@@ -31,6 +32,7 @@ book: out preface.tex $(SRC)
 	--include-before-body=preface.tex \
 	--lua-filter=diagram-generator.lua \
 	--lua-filter=webp.lua \
+	--lua-filter=color-box.lua \
 	-o out/技术图书排版-标准版-$(VER).pdf \
 	$(SRC)
 
@@ -68,6 +70,7 @@ docx: out preface.tex $(SRC)
 	--number-sections \
 	--lua-filter=diagram-generator.lua \
 	--lua-filter=docx-figure-number.lua \
+	--lua-filter=color-box.lua \
 	-o out/技术图书排版-$(VER).docx \
 	README.md $(SRC)
 

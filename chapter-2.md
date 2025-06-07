@@ -32,6 +32,26 @@ $endif$
 $endif$
 ```
 
+导入更多的宏包。
+
+```tex
+\usepackage{changepage}
+\usepackage{float}
+\usepackage{fontspec}
+```
+
+带颜色的文本框。
+
+```tex
+\usepackage{tcolorbox}
+% \newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black}
+\newtcolorbox{redbox}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{greenbox}[1]{colback=green!5!white,colframe=green!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{bluebox}[1]{colback=blue!5!white,colframe=blue!85!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{cyanbox}[1]{colback=cyan!5!white,colframe=cyan!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{graybox}[1]{colback=gray!5!white,colframe=gray!75!black,fonttitle=\bfseries,title=#1}
+```
+
 跟字体相关的设置。我们使用了谷歌的思源 CJK（中日韩文）字体[^noto-fonts]。嗯，因为该字体是开源的。如果你使用其它字体嵌入到 PDF 中，要注意字体的版权问题。
 
 [^noto-fonts]: <https://www.google.com/get/noto/>
@@ -40,10 +60,8 @@ $endif$
 
 [^smiley-sans]: 德意黑体是 2022 年发布的免费开源字体，本身就是按斜体设计的，参见 <https://github.com/atelier-anchor/smiley-sans> 。
 
+
 ```tex
-\usepackage{changepage}
-\usepackage{float}
-\usepackage{fontspec}
 \newcommand\mainfont{Noto Sans CJK SC DemiLight}
 \newcommand\boldfont{Noto Sans CJK SC Bold}
 \newcommand\itfont{Smiley Sans}
