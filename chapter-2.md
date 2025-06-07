@@ -67,13 +67,15 @@ $endif$
 \newcommand\itfont{Smiley Sans}
 \newcommand\kaifont{Adobe Kaiti Std}
 \newcommand\fangsong{Adobe Kaiti Std}
+\newcommand\sarasa{Sarasa Mono SC Nerd}
 \setmainfont[BoldFont=\boldfont,ItalicFont={\kaifont}]{\mainfont}
 \newfontfamily\kai{\kaifont}
 \newfontfamily\fs{\fangsong}
 \newfontfamily\zhfont[BoldFont=\boldfont,ItalicFont={\kaifont}]{\mainfont}
 \newfontfamily\zhpunctfont[BoldFont=\boldfont]{\mainfont}
 \setromanfont[Mapping=tex-text,BoldFont=\boldfont,ItalicFont=\itfont]{\mainfont}
-\setmonofont{Noto Sans Mono CJK SC}
+% \setmonofont{Noto Sans Mono CJK SC}
+\setmonofont[BoldFont=Sarasa Mono SC Nerd Bold]{\sarasa}
 ```
 
 设置中文间距等（最新版的可能不需要了）。
