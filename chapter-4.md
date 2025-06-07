@@ -281,7 +281,7 @@ $$
 
 [^maxwell]: 参见 <https://www.zhihu.com/question/25121612> 及 <https://zh.wikipedia.org/wiki/馬克士威方程組>。
 
-```
+```tex
 $$
 \begin{aligned}
     \nabla \cdot \mathbf{E} &= 4 \frac{\rho}{\varepsilon_0} \\
@@ -305,7 +305,7 @@ $$
 
 麦克斯韦方程组的积分形式如下：
 
-```
+```tex
 $$
 \begin{aligned}
 \oiint_{S} \, D\cdot ds &= Q_{f} \\

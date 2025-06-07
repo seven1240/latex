@@ -154,7 +154,7 @@ docker:
 - `3.0.1`：pandoc 3.0.1
 - `tiny-3.0.1`：pandoc 3.0.1
 
-```
+```sh
 $ docker image ls ccr.ccs.tencentyun.com/free/pandoc
 REPOSITORY                           TAG         IMAGE ID      SIZE
 ccr.ccs.tencentyun.com/free/pandoc   3.0.1       3e18c37be4e3  1.1GB
