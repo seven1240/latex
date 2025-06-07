@@ -29,12 +29,13 @@ Word 有一个功能确实不大好替代，那就是『修订』功能，使用
 - 还可以生成 EPUB 电子书等其它格式，欢迎到 Github 上给我提 pr。
 - 如果你发现错别字或别的错误，也欢迎提 pr。
 
-本书是可以『自举』的，也就是说你可以通过本书的源代码生成本书的 PDF，参见：<https://github.com/seven1240/latex> （**注意**：PDF 版不会实时更新，可能会比较旧）。你也可以访问本书生成的 HTML：<http://www.freeswitch.org.cn/books/typesetting/> 。
+本书是可以『自举』的，也就是说你可以通过本书的源代码生成本书的 PDF[^releases]，参见：<https://github.com/seven1240/latex> （**注意**：PDF 版不会实时更新，可能会比较旧）。你也可以访问本书生成的 HTML：<http://www.freeswitch.org.cn/books/typesetting/> 。
+
+[^releases]: 参见： <https://github.com/seven1240/latex/releases> 。
 
 最后，本书写作的目的并不是教你成为一个排版专家，相反，希望通过分享我的排版模板，让广大技术人员专注于用自己喜欢的工具写好自己的作品，忘记排版 ;)。
 
 > 杜金房/2019/烟台 更新于 2023 年 2 月 1 日
-
 
 ```{.redbox caption="更新"}
 为支持[《Hello 算法》的编译](https://github.com/seven1240/hello-algo-pdf)，增加了你现在看到的这种“带颜色的文本框”样式。
