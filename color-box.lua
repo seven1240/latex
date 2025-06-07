@@ -1,10 +1,10 @@
 -- support PDF color box
 -- Usage:
--- ```{redbox, caption="This is a red box"}
+-- ```{.redbox, caption="This is a red box"}
 -- This is some text inside a red box.
 -- ```
 -- or
--- ```.greenbox
+-- ```greenbox
 -- This is some text inside a green box. No caption.
 -- ```
 
@@ -29,9 +29,21 @@ function CodeBlock(block)
 				local content = latex_start .. latex_content .. latex_end
 				return pandoc.RawBlock('latex', content)
 			elseif FORMAT == "docx" then
-				-- quick and dirty implementation fox docx
-				-- todo: make a custom styled Div
-				return pandoc.BlockQuote(parsed.blocks)
+				if block.attributes.caption then
+					local caption = pandoc.Strong(block.attributes.caption .. '：')
+					table.insert(parsed.blocks[1].content, 1, caption)
+				end
+				local div = pandoc.Div(parsed.blocks)
+				div.attr.attributes['custom-style'] = class
+				return div
+			elseif FORMAT == "html" or FORMAT == "chunkedhtml" then
+				if block.attributes.caption then
+					local caption = pandoc.Strong(block.attributes.caption .. '：')
+					table.insert(parsed.blocks[1].content, 1, caption)
+				end
+				local div = pandoc.Div(parsed.blocks)
+				div.classes:insert(class)
+				return div
 			end
 		end
 	end

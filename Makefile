@@ -47,6 +47,7 @@ mobile: out preface.tex $(SRC)
 	--include-before-body=preface.tex \
 	--lua-filter=diagram-generator.lua \
 	--lua-filter=webp.lua \
+	--lua-filter=color-box.lua \
 	-o out/技术图书排版-移动版-$(VER).pdf \
 	$(SRC)
 
@@ -62,6 +63,7 @@ print: out preface.tex $(SRC)
 	--include-before-body=preface.tex \
 	--lua-filter=diagram-generator.lua \
 	--lua-filter=webp.lua \
+	--lua-filter=color-box.lua \
 	-o out/技术图书排版-印刷版-$(VER).pdf \
 	$(SRC)
 
@@ -71,6 +73,7 @@ docx: out preface.tex $(SRC)
 	--lua-filter=diagram-generator.lua \
 	--lua-filter=docx-figure-number.lua \
 	--lua-filter=color-box.lua \
+	--reference-doc=color-box.docx \
 	-o out/技术图书排版-$(VER).docx \
 	README.md $(SRC)
 
@@ -89,6 +92,7 @@ html: $(SRC)
 	--variable description-meta="《技术图书排版》，开源免费电子书。" \
 	--lua-filter diagram-generator.lua \
 	--lua-filter=docx-figure-number.lua \
+	--lua-filter=color-box.lua \
 	--include-before ad.html \
 	--include-after after.html \
 	README.md $(SRC)

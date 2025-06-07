@@ -184,6 +184,76 @@ Lua 脚本，仅用于`docx`格式的文件，为图片添加编号。
 
 Pandoc 虽然有 native-numbering 选项，但是对于图片编号不能区分章节。
 
+## color-box.lua
+
+Lua 脚本，用于添加带颜色的文本框。
+
+```lua
+local supported_boxes = { -- 支持以下三种类型
+	redbox = 'redbox',
+	greenbox = 'greenbox',
+	bluebox = 'bluebox'
+}
+
+function CodeBlock(block)
+	for class, env in pairs(supported_boxes) do
+		if block.classes:includes(class) then      -- 将符合条件的代码块转换成文本框
+			local parsed = pandoc.read(block.text, 'markdown')  -- 读取代码块中的 markdown 内容
+			if FORMAT == "latex" then              -- LaTex 和 PDF
+				local latex_content = pandoc.write(parsed, 'latex')
+				local caption = '{}'
+				if block.attributes.caption then
+					caption = '{' .. block.attributes.caption .. '}'
+				end
+				local latex_start = '\\begin{' .. class .. '}' .. caption .. '\n'
+				local latex_end = '\n\\end{' .. class .. '}'
+				local content = latex_start .. latex_content .. latex_end
+				return pandoc.RawBlock('latex', content)
+			elseif FORMAT == "docx" then          -- docx，需要一个额外的样式参考文件
+				if block.attributes.caption then
+					local caption = pandoc.Strong(block.attributes.caption .. '：')
+					table.insert(parsed.blocks[1].content, 1, caption)
+				end
+				local div = pandoc.Div(parsed.blocks)
+				div.attr.attributes['custom-style'] = class
+				return div
+			elseif FORMAT == "html" or FORMAT == "chunkedhtml" then -- HTML
+				if block.attributes.caption then
+					local caption = pandoc.Strong(block.attributes.caption .. '：')
+					table.insert(parsed.blocks[1].content, 1, caption)
+				end
+				local div = pandoc.Div(parsed.blocks)
+				div.classes:insert(class) -- 需要对应的 CSS 样式
+				return div
+			end
+		end
+	end
+	return nil
+end
+```
+
+使用方法如下：
+
+````markdown
+```{.redbox, caption="标题"}
+带标题的文本框
+```
+
+```greenbox
+不带标题的文本框
+```
+````
+
+效果如下：
+
+```{.redbox caption="标题"}
+带标题的文本框
+```
+
+```greenbox
+不带标题的文本框
+```
+
 ## cover.tex
 
 我们先从这个文件熟悉一下 LaTex 的语法。你不需要精通 LaTex，但学一点总是有好处。
