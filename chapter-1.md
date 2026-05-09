@@ -156,7 +156,17 @@ verbatim-in-note: true
 
 ## diagram-generator.lua
 
-这是一个 Lua 脚本，用于将以`graphviz`和`mscgen`标记的代码块转换成图片。
+这是一个 Lua 脚本，用于将以`graphviz`和`msc`标记的代码块转换成图片。也可以直接把 `.dot` 文件做为图片引入，如：
+
+```markdown
+![这是一张由Graphviz渲染的图片](dot/example.dot)
+
+![这是一张由Graphviz渲染的图片，width=50%](dot/example.dot){ width=50% }
+```
+
+![这是一张由Graphviz渲染的图片](dot/example.dot)
+
+![这是一张由Graphviz渲染的图片，width=50%](dot/example.dot){ width=50% }
 
 ## webp.lua
 
