@@ -457,6 +457,37 @@ function CodeBlock(block)
   end
 end
 
+local function Image(img)
+  if string.match(img.src, "%.dot$") then
+    local f = io.open(img.src, 'r')
+    if f then
+      local code = f:read("*all")
+      f:close()
+      
+      local dot_filetype = "png"
+      local dot_mimetype = "image/png"
+      
+      local success, out_img = pcall(graphviz, code, dot_filetype)
+      if success and out_img then
+        local fname = pandoc.sha1(out_img) .. "." .. dot_filetype
+        pandoc.mediabag.insert(fname, dot_mimetype, out_img)
+        img.src = fname
+        return img
+      else
+        io.stderr:write("Failed to convert graphviz image: " .. img.src .. "\n")
+        local placeholder_svg = string.format([[<svg width="320" height="120" xmlns="http://www.w3.org/2000/svg"><rect width="100%%" height="100%%" fill="#ffeeee"/><text x="50%%" y="50%%" font-family="sans-serif" font-size="14" fill="#cc0000" text-anchor="middle">Failed to convert %s</text></svg>]], img.src:match("([^/]+)$") or img.src)
+        local fname = pandoc.sha1(placeholder_svg) .. ".svg"
+        pandoc.mediabag.insert(fname, "image/svg+xml", placeholder_svg)
+        img.src = fname
+        return img
+      end
+    else
+      io.stderr:write("Could not open file: " .. img.src .. "\n")
+    end
+  end
+  return nil
+end
+
 local function Math(math)
   if FORMAT ~= "latex" then
     return math
@@ -485,6 +516,7 @@ end
 -- define our custom order:
 return {
     {Meta = Meta},
+    {Image = Image},
     {CodeBlock = CodeBlock},
     {Math = Math},
 }
