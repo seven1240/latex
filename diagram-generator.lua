@@ -8,9 +8,13 @@ can be processed. For further details, see README.md.
 Copyright: © 2018-2020 John MacFarlane <jgm@berkeley.edu>,
              2018 Florian Schätzig <florian@schaetzig.de>,
              2019 Thorsten Sommer <contact@sommer-engineering.com>,
-             2019-2020 Albert Krewinkel <albert+pandoc@zeitkraut.de>
+             2019-2020 Albert Krewinkel <albert+pandoc@zeitkraut.de>,
+             2020-2026 Seven Du <dujinfang@gmail.com>,
 License:   MIT – see LICENSE file for details
 ]]
+-- VERSION it
+DG_VERSION=0.1
+
 -- Module pandoc.system is required and was added in version 2.7.3
 PANDOC_VERSION:must_be_at_least '2.7.3'
 
